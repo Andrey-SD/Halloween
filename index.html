@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Секретна Хелловін-Місія</title>
+    
+    <!-- Підключення шрифтів -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Фавіконка 🎃 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎃</text></svg>">
+
+    <!-- Підключення Tailwind CSS для зручної верстки -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Кастомні стилі для анімацій та ефектів -->
+    <style>
+        body {
+            background-color: #0d0514;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(103, 30, 165, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 107, 0, 0.15) 0%, transparent 50%);
+            color: #e2d7f4;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, .spooky-font {
+            font-family: 'Creepster', cursive;
+            letter-spacing: 2px;
+        }
+
+        /* Неоновий текст */
+        .neon-text-orange {
+            color: #ff8c00;
+            text-shadow: 0 0 5px #ff8c00, 0 0 10px #ff8c00, 0 0 20px #ff4500;
+        }
+
+        .neon-text-purple {
+            color: #d175ff;
+            text-shadow: 0 0 5px #d175ff, 0 0 10px #9d00ff;
+        }
+
+        /* Блок із шифром */
+        .cipher-box {
+            background: rgba(20, 10, 30, 0.8);
+            border: 2px dashed #ff8c00;
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.3) inset;
+        }
+
+        /* Інпут та його світіння */
+        .mission-input {
+            transition: all 0.3s ease;
+        }
+        
+        .mission-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(209, 117, 255, 0.6);
+            border-color: #d175ff;
+        }
+
+        /* Анімація помилки (Shake) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        .error-state {
+            border-color: #ff003c !important;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6) !important;
+            color: #ff003c;
+        }
+
+        /* Анімація успіху */
+        .success-state {
+            border-color: #39ff14 !important;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.8) !important;
+            color: #39ff14;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(57, 255, 20, 0.9); }
+            100% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.5); }
+        }
+
+        /* Декоративні летючі елементи */
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+            z-index: -1;
+            animation: float-up 10s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.3; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative">
+
+    <!-- Декорації на фоні -->
+    <div class="floating-emoji" style="left: 10%; animation-duration: 12s; animation-delay: 0s;">🦇</div>
+    <div class="floating-emoji" style="left: 80%; animation-duration: 15s; animation-delay: 2s;">👻</div>
+    <div class="floating-emoji" style="left: 20%; animation-duration: 10s; animation-delay: 5s;">🎃</div>
+    <div class="floating-emoji" style="left: 70%; animation-duration: 18s; animation-delay: 1s;">🕷️</div>
+
+    <div class="max-w-2xl w-full bg-[#1c0f24]/90 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-[0_0_40px_rgba(157,78,221,0.2)] border border-[#3b1c4e] z-10 relative">
+        
+        <!-- Заголовок -->
+        <h1 class="text-4xl md:text-5xl text-center mb-6 spooky-font neon-text-orange">
+            🎃 Секретна Хелловін-Місія 🎃
+        </h1>
+
+        <p class="text-center text-lg mb-8">
+            Запрошення на вечірку зашифровано! Щоб потрапити туди і створити свого героя, розкрий таємницю стародавнього шифру.
+        </p>
+
+        <!-- Відео -->
+        <div class="w-full max-w-[560px] mx-auto rounded-xl overflow-hidden shadow-[0_0_20px_rgba(209,117,255,0.4)] mb-8 border border-purple-800">
+            <div class="relative pb-[56.25%] h-0">
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/xzffWPKA3Es?rel=0" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Секретний код -->
+        <div class="cipher-box rounded-xl p-6 mb-8 text-center">
+            <h2 class="text-2xl mb-2 text-purple-300">Зашифрований код:</h2>
+            <p class="text-sm text-gray-400 mb-4">Підказка: Зсув +3 (Цезар)</p>
+            <div class="text-4xl md:text-5xl font-black tracking-widest text-white drop-shadow-[0_2px_5px_rgba(255,140,0,0.8)]">
+                VNHNOHRQ
+            </div>
+        </div>
+
+        <!-- Інпут та Кнопка -->
+        <div class="flex flex-col items-center">
+            <div id="inputWrapper" class="w-full max-w-md relative flex items-center bg-black/50 rounded-full border-2 border-purple-600 p-1 mb-4 transition-all duration-300">
+                <input 
+                    type="text" 
+                    id="secretCode" 
+                    placeholder="Введи розшифроване слово..." 
+                    class="mission-input flex-1 bg-transparent border-none text-white text-center text-lg md:text-xl px-6 py-3 rounded-l-full placeholder-purple-400/50"
+                    autocomplete="off"
+                >
+                <button 
+                    onclick="checkCode()"
+                    class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(255,107,0,0.6)]"
+                >
+                    Розблокувати
+                </button>
+            </div>
+            
+            <!-- Повідомлення (фідбек) -->
+            <div id="feedback" class="h-8 font-bold text-center text-lg transition-opacity duration-300 opacity-0">
+                <!-- Текст вставляється через JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript логіка -->
+    <script>
+        // Обробка натискання клавіші Enter
+        document.getElementById('secretCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        function checkCode() {
+            const input = document.getElementById('secretCode');
+            const wrapper = document.getElementById('inputWrapper');
+            const feedback = document.getElementById('feedback');
+            const val = input.value.trim().toUpperCase();
+
+            // Скидаємо попередні анімації та класи
+            wrapper.classList.remove('animate-shake', 'error-state', 'success-state');
+            feedback.style.opacity = '0';
+            
+            // Затримка для перезапуску анімацій, якщо натиснули кнопку кілька разів
+            setTimeout(() => {
+                // Правильні варіанти відповіді (обидва підходять)
+                if (val === 'SKELETON' || val === 'OPEN_HALLOWEEN_NIGHT_2026') {
+                    // УСПІХ
+                    wrapper.classList.add('success-state');
+                    input.disabled = true; // Блокуємо поле після успіху
+                    
+                    feedback.innerHTML = '🎉 Доступ дозволено! Система розблокована! 🎃';
+                    feedback.className = 'h-8 font-bold text-center text-xl text-green-400 drop-shadow-[0_0_10px_rgba(57,255,20,0.8)] transition-opacity duration-300 opacity-100 mt-2';
+                    
+                    // Додатковий ефект: змінюємо колір кнопки
+                    const btn = wrapper.querySelector('button');
+                    btn.classList.remove('from-orange-500', 'to-red-600', 'hover:from-orange-400', 'hover:to-red-500');
+                    btn.classList.add('bg-green-600', 'hover:bg-green-500', 'shadow-[0_0_15px_rgba(57,255,20,0.6)]');
+                    btn.innerText = 'Відкрито!';
+                    btn.disabled = true;
+
+                } else if (val === '') {
+                    // ПОРОЖНЄ ПОЛЕ
+                    wrapper.classList.add('animate-shake', 'error-state');
+                    feedback.innerHTML = 'Введи код, щоб продовжити!';
+                    feedback.className = 'h-8 font-bold text-center text-lg text-red-500 transition-opacity duration-300 opacity-100 mt-2';
+                } else {
+                    // ПОМИЛКА
+                    wrapper.classList.add('animate-shake', 'error-state');
+                    feedback.innerHTML = '❌ Невірний код! Спробуй ще раз... 👻';
+                    feedback.className = 'h-8 font-bold text-center text-lg text-red-500 drop-shadow-[0_0_8px_rgba(255,0,60,0.8)] transition-opacity duration-300 opacity-100 mt-2';
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
